@@ -20,9 +20,9 @@ def LoginPage(request):
     if request.user.is_authenticated:
         return redirect('home')
 
-    if request.method == 'GET':
-        Username = request.GET.get('username')
-        Password = request.GET.get('password')
+    if request.method == 'POST':
+        Username = request.POST.get('username')
+        Password = request.POST.get('password')
 
         try:
             user = User.objects.get(username=Username)
