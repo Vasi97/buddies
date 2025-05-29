@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import sys
 import os
+from decouple import config
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
