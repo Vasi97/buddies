@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Room, Topic, Message, User
-from .forms import RoomForm, UserForm ,MyUserCreationForm
+from .forms import RoomForm, UserForm 
 from django.db.models import Q
 
 # Create your views here.
@@ -44,21 +44,21 @@ def LogoutUser(request):
     logout(request)
     return redirect('login')
 
-def RegisterUser(request):
-    form = MyUserCreationForm()
+# def RegisterUser(request):
+#     form = MyUserCreationForm()
 
-    if request.method == "POST":
-        form = MyUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            user.save()
-            login(request, user)
-            return redirect('home')
-        else:
-            messages.error(request,"An error occured please try again")    
+#     if request.method == "POST":
+#         form = MyUserCreationForm(request.POST)
+#         if form.is_valid():
+#             user = form.save(commit=False)
+#             user.username = user.username.lower()
+#             user.save()
+#             login(request, user)
+#             return redirect('home')
+#         else:
+#             messages.error(request,"An error occured please try again")    
 
-    return render(request,'base/login_reg.html',{'form':form})
+#     return render(request,'base/login_reg.html',{'form':form})
 
 def Home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ""
