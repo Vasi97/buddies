@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Room, Topic, Message, User
 from .forms import RoomForm, UserForm 
@@ -44,21 +45,21 @@ def LogoutUser(request):
     logout(request)
     return redirect('login')
 
-# def RegisterUser(request):
-#     form = MyUserCreationForm()
+def RegisterUser(request):
+    form = UserCreationForm()
 
-#     if request.method == "POST":
-#         form = MyUserCreationForm(request.POST)
-#         if form.is_valid():
-#             user = form.save(commit=False)
-#             user.username = user.username.lower()
-#             user.save()
-#             login(request, user)
-#             return redirect('home')
-#         else:
-#             messages.error(request,"An error occured please try again")    
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request,"An error occured please try again")    
 
-#     return render(request,'base/login_reg.html',{'form':form})
+    return render(request,'base/login_reg.html',{'form':form})
 
 def Home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ""
