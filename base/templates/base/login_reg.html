@@ -76,6 +76,9 @@
               <div class="form__group form__group">
                 <label for="room_name">{{ field.label }}</label>
                 {{field}}
+                {% if field.name == "password1" or field.name == "password2" %}
+                  <small class="text-muted">Max 8 characters</small>
+                {% endif %}
               </div>
               {% endfor %}
               
